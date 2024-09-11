@@ -100,6 +100,7 @@ async function main() {
     const RABBIT = process.env.RABBIT;
 
     await startMicroservice(DBHOST, DBNAME, RABBIT, PORT);
+    console.log('hello world');
 }
 
 if (require.main === module) {

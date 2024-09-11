@@ -39,6 +39,7 @@ async function main() {
     app.get("/video", async (req, res) => { // Route for streaming video.
 
         const videoId = req.query.id;
+        console.log('hello world');
         const response = await axios({ // Forwards the request to the video-storage microservice.
             method: "GET",
             url: `http://video-storage/video?id=${videoId}`, 

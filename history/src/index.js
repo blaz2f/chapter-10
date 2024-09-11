@@ -100,6 +100,7 @@ async function main() {
         // Retreives viewing history from database.
         // In a real application this should be paginated.
         //
+        console.log('hello world');
         const history = await historyCollection.find().toArray(); 
         res.json({ history });
     });

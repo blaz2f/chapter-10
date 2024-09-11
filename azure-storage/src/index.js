@@ -48,6 +48,7 @@ const app = express();
 app.get("/video", async (req, res) => {
 
     const videoId = req.query.id;
+    console.log('hello world');
 
     const blobService = createBlobService();
     const containerClient = blobService.getContainerClient(STORAGE_CONTAINER_NAME);
