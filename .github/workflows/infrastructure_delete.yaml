@@ -1,0 +1,51 @@
+# 
+# GitHub Actions workflow.
+#
+# Delete RabbitMQ and MongoDB database.
+#
+
+name: Delete infrastructure
+
+on:
+  #
+  # Allows Deletion to be invoked manually through the GitHub Actions user interface.
+  #
+  workflow_dispatch: 
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      
+      # Checks-out your repository under $GITHUB_WORKSPACE.
+      - uses: actions/checkout@v3
+
+      #
+      # Installs Kubectl and connects it to the cluster.
+      #
+      # https://github.com/marketplace/actions/kubernetes-cli-kubectl
+      #
+      - uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+          kubectl-version: v1.24.2
+
+      # 
+      # Delete MongoDB.
+      #
+      - name: Delete MongoDB
+        run: kubectl delete -f ./scripts/cd/mongodb.yaml
+
+      # 
+      # Delete RabbitMQ.
+      #
+      - name: Delete Rabbit
+        run: kubectl delete -f ./scripts/cd/rabbit.yaml
+
+      #
+      # Getting confirmation that deployments were deleted.
+      #
+      - name: 'Getting Deployments'
+        run: 'kubectl get deployments'
