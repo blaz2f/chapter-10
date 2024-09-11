@@ -18,8 +18,8 @@ docker push $CONTAINER_REGISTRY/metadata:1
 docker build -t $CONTAINER_REGISTRY/history:1 --file ../../history/Dockerfile-prod ../../history
 docker push $CONTAINER_REGISTRY/history:1
 
-docker build -t $CONTAINER_REGISTRY/mock-storage:1 --file ../../mock-storage/Dockerfile-prod ../../mock-storage
-docker push $CONTAINER_REGISTRY/mock-storage:1
+docker build -t $CONTAINER_REGISTRY/azure-storage:1 --file ../../azure-storage/Dockerfile-prod ../../azure-storage
+docker push $CONTAINER_REGISTRY/azure-storage:1
 
 docker build -t $CONTAINER_REGISTRY/history:1 --file ../../history/Dockerfile-prod ../../history
 docker push $CONTAINER_REGISTRY/history:1
@@ -42,7 +42,7 @@ kubectl apply -f rabbit.yaml
 kubectl apply -f mongodb.yaml 
 envsubst < metadata.yaml | kubectl apply -f -
 envsubst < history.yaml | kubectl apply -f -
-envsubst < mock-storage.yaml | kubectl apply -f -
+envsubst < azure-storage.yaml | kubectl apply -f -
 envsubst < video-streaming.yaml | kubectl apply -f -
 envsubst < video-upload.yaml | kubectl apply -f -
 envsubst < gateway.yaml | kubectl apply -f -
