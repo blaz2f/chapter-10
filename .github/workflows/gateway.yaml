@@ -69,3 +69,9 @@ jobs:
       #
       - name: Deploy
         run: ./scripts/cd/deploy.sh
+
+      #
+      # Getting external IP address for accessing deployment.
+      #
+      - name: 'Getting Deployment address'
+        run: 'kubectl get services'
